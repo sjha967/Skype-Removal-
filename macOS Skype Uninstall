@@ -1,0 +1,54 @@
+#!/bin/sh
+
+# Check if the specified application is installed ...
+
+if [ -d "/Applications/Skype for Business.app" ] ; then
+
+    echo "/Applications/Skype for Business.app located; proceeding ..."
+
+    echo "Removing /Applications/Skype for Business.app ..."
+    
+    sudo kill "Skype for Business"
+
+    rm -rf /Applications/Skype\ For\ Business.app
+
+    rm -rf /Applications/Skype for Business.app
+    rm -rf /Library/Internet Plug-Ins/MeetingJoinPlugin.plugin
+    
+    defaults delete com.microsoft.SkypeForBusiness || true
+    
+    rm -rf ~/Library/Containers/com.microsoft.SkypeForBusiness
+    
+    rm -rf ~/Library/Logs/DiagnosticReports/Skype for Business_*
+    
+    rm -rf ~/Library/Saved Application State/com.microsoft.SkypeForBusiness.savedState
+    
+    rm -rf ~/Library/Preferences/com.microsoft.SkypeForBusiness.plist
+    
+    rm -rf ~/Library/Application Support/CrashReporter/Skype for Business_*
+    
+    rm -rf ~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.microsoft.skypeforbusiness*
+    
+    rm -rf ~/Library/Cookies/com.microsoft.SkypeForBusiness*
+    
+    rm -rf /private/var/db/receipts/com.microsoft.SkypeForBusiness*
+    
+    rmdir ~/Library/Application Scripts/com.microsoft.SkypeForBusiness
+    
+    find -f /private/var/db/BootCaches/* -name "app.com.microsoft.SkypeForBusiness*" -exec sudo rm -rf {}
+
+    echo "Removed /Applications/Skype for Business.app."
+    
+    killall "Dock"
+
+    exit 0
+
+else
+
+    echo "/Applications/Skype for Business.app NOT found; nothing to remove."
+
+    exit 0
+
+fi
+
+exit 0
